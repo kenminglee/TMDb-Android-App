@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">TMDb</string>
+    <string name="just_want_to_browse"><u>I just want to browse</u></string>
+    <string name="search_hint">Actors, Movies, TV Shows</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detail"><b>Detail</b></string>
+    <string name="NoDetailsProvided">No details provided</string>
+    <string name="NoResultsFound">No Results Found for \"%1$s\" %2$s</string>
+    <string name="ShowingResults">Showing %1$d Results for \"%2$s\" %3$s</string>
+    <string name="SearchingFor">Searching for \"%1$s\" %2$s</string>
+    <string name="Movie">Movie</string>
+    <string name="People">People</string>
+    <string name="TVShow">TV Show</string>
+    <string name="IMDbName">https://m.imdb.com/name/</string>
+    <string name="IMDbTitle">https://m.imdb.com/title/</string>
+    <string name="imageUrl">https://image.tmdb.org/t/p/original%1$s</string>
+    <string name="theActor">%1$s the Actor</string>
+    <string name="inMovies">%1$s in Movies</string>
+    <string name="inTVShow">%1$s in TV Show</string>
+    <string name="positionKey">SearchFragmentPosition</string>
+</resources>

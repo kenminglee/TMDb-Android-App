@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:id="@+id/searchToolbar">
+<!--        android:background="@drawable/grey_border_bottom">-->
+
+        <Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_backarrow_teal"
+                    android:layout_marginEnd="15dp"
+                    android:id="@+id/ivBackArrow" />
+
+<!--                <ImageView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:src="@drawable/ic_cancel"-->
+<!--                    android:layout_alignParentEnd="true"-->
+<!--                    android:layout_marginEnd="15dp"-->
+<!--                    android:id="@+id/cancelBut"/>-->
+
+                <androidx.appcompat.widget.SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="15dp"
+                    android:layout_alignBottom="@id/ivBackArrow"
+                    android:hint="Search"
+                    android:textColor="@android:color/white"
+                    android:background="@null"
+                    android:textSize="20sp"
+                    android:maxLines="1"
+                    app:queryHint="@string/search_hint"
+                    app:iconifiedByDefault="false"
+                    android:layout_toRightOf="@id/ivBackArrow"
+                    android:id="@+id/searchBar"
+                    app:searchIcon="@null"/>
+<!--                android:layout_toLeftOf="@id/cancelBut"-->
+
+
+
+            </RelativeLayout>
+
+
+        </Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+</merge>
