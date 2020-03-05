@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class                                                                                                                                                               ApiFactory{
+class ApiFactory{
 
     //Creating Auth Interceptor to add api_key query in front of all the requests.
     private fun getAuthInterceptor(): Interceptor{
