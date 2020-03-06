@@ -1,4 +1,4 @@
-package com.example.tmdb.ui.detailfragment
+package com.example.tmdb.UI.DetailFragment
 
 import android.graphics.Color
 import android.os.Bundle
@@ -7,34 +7,28 @@ import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.tmdb.R
-import com.example.tmdb.databinding.FragmentDetailBinding
-import com.example.tmdb.ui.datamodel.DetailDataModel
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
-import com.example.tmdb.ui.searchfragment.ResultsAdapter
-import com.example.tmdb.ui.webviewfragment.WebViewFragment
+import com.example.tmdb.UI.DataModel.DetailDataModel
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.SearchFragment.ResultsAdapter
+import com.example.tmdb.UI.WebViewFragment.WebViewFragment
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.fragment_detail.*
 import kotlin.math.abs
 
-class DetailFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, DetailContract.View{
+class DetailFragment : Fragment(), AppBarLayout.OnOffsetChangedListener,
+    DetailContract.View {
     private lateinit var detail: SearchAndBrowseDataModel
     private lateinit var presenter: DetailContract.Presenter
-    private var binding: FragmentDetailBinding? = null
-    private val vm by lazy {
-        ViewModelProvider(this).get(DetailViewModel::class.java)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        presenter = vm.getPresenter()
+        presenter =
+            DetailPresenter(DetailModel())
         super.onCreate(savedInstanceState)
     }
 
     override fun onResume() {
-        presenter.onViewAttached(this, DetailRouter())
+        presenter.onAttach(this)
         super.onResume()
     }
 
@@ -47,24 +41,17 @@ class DetailFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, DetailC
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        val local_binding = DataBindingUtil.inflate<FragmentDetailBinding>(inflater, R.layout.fragment_detail, container, false)
-        binding = local_binding
-        local_binding.lifecycleOwner = this
-        local_binding.viewmodel = vm
-        return local_binding.root
-    }
+    ): View? = inflater.inflate(R.layout.fragment_detail, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         app_bar_layout.addOnOffsetChangedListener(this)
-        vm.setMovie(detail)
+
         detail_BackArrow.setOnClickListener{
 //            activity?.onBackPressed()
             activity?.supportFragmentManager?.popBackStack()
-        }
 
+        }
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
@@ -72,6 +59,7 @@ class DetailFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, DetailC
             // Collapsed
             detail_collapsing_toolbar.title = detail_name.text
         else detail_collapsing_toolbar.title = ""
+
     }
 
 
@@ -94,10 +82,13 @@ class DetailFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, DetailC
         }
         expandedImage.setImageURI(getString(R.string.imageUrl, details.imageUrl))
         detail_subject.text = str
+        detail_name.text = detail.name
+        detail_ratingbar.rating = (detail.rating/2).toFloat()
+        if(details.detail.isEmpty()) detail_body.text = getString(R.string.NoDetailsProvided) else detail_body.text = details.detail
         if(details.imdbId.isNotEmpty()){
             val url = if(type == ResultsAdapter.PERSON) getString(R.string.IMDbName)+details.imdbId else getString(R.string.IMDbTitle)+details.imdbId
             detail_button.setOnClickListener{
-                presenter.navigateToWebView(WebViewFragment.newInstance(url, detail.name), activity?.supportFragmentManager)
+                navigateToNewFragment(WebViewFragment.newInstance(url, detail.name))
             }
             detail_button.visibility = View.VISIBLE
         }
@@ -111,8 +102,12 @@ class DetailFragment : Fragment(), AppBarLayout.OnOffsetChangedListener, DetailC
         return detail.type
     }
 
-    override fun getViewModel(): DetailContract.ViewModel {
-        return vm
+    private fun navigateToNewFragment(fragment: Fragment){
+        activity?.supportFragmentManager
+            ?.beginTransaction()
+            ?.replace(R.id.container, fragment, null)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 
     companion object{

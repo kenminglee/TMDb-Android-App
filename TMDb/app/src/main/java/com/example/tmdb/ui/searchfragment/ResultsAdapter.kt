@@ -1,4 +1,4 @@
-package com.example.tmdb.ui.searchfragment
+package com.example.tmdb.UI.SearchFragment
 
 import android.graphics.Color
 import android.text.SpannableString
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdb.R
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
 import kotlinx.android.synthetic.main.fragment_search_items.view.*
 
 class ResultsAdapter(var presenter: SearchContract.Presenter) : RecyclerView.Adapter<ResultsAdapter.ResultsHolder>() {

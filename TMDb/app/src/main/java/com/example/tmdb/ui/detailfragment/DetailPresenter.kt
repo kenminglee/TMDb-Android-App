@@ -1,33 +1,26 @@
-package com.example.tmdb.ui.detailfragment
+package com.example.tmdb.UI.DetailFragment
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import com.example.tmdb.ui.datamodel.DetailDataModel
+import com.example.tmdb.UI.DataModel.DetailDataModel
 
-class DetailPresenter : DetailContract.Presenter{
+class DetailPresenter(private var model: DetailContract.Model) :
+    DetailContract.Presenter {
     private var view: DetailContract.View? = null
-    private var interactor: DetailContract.Interactor? = null
 
-    override fun onViewAttached(view: DetailContract.View, router: DetailContract.Router) {
+    override fun onAttach(view: DetailContract.View) {
         this.view = view
-        interactor = DetailInteractor(view.getDetailsId(), view.getType())
-        (interactor as DetailInteractor).setPresenter(this)
-        (interactor as DetailInteractor).onRouterAttached(router)
+        model = DetailModel()
+        model.setPresenter(this)
+        model.fetch(view.getDetailsId(), view.getType())
     }
 
     override fun onDetach() {
         this.view = null
     }
 
-    override fun fetch(id: Int, type: String){ interactor?.fetch(id, type) }
+    override fun fetch(id: Int, type: String) = model.fetch(id, type)
 
     override fun renderDetails(details: DetailDataModel, type: String) {
-        view?.getViewModel()?.renderDetails(details, type)
         view?.renderDetails(details, type)
-    }
-
-    override fun navigateToWebView(fragment: Fragment, fragmentManager: FragmentManager?) {
-        interactor?.navigateToWebView(fragment, fragmentManager)
     }
 
 }

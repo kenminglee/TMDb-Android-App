@@ -1,4 +1,4 @@
-package com.example.tmdb.ui.searchfragment
+package com.example.tmdb.UI.SearchFragment
 
 import android.app.SearchManager
 import android.content.Context
@@ -16,12 +16,13 @@ import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
 import com.example.tmdb.R
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
-import com.example.tmdb.ui.detailfragment.DetailFragment
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.DetailFragment.DetailFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.fragment_search_toolbar.*
 
-class SearchFragment : Fragment(), SearchContract.View{
+class SearchFragment : Fragment(),
+    SearchContract.View {
 
     private lateinit var presenter: SearchPresenter
     private lateinit var resultsAdapter: ResultsAdapter
@@ -32,7 +33,8 @@ class SearchFragment : Fragment(), SearchContract.View{
     private lateinit var cursorAdapter: SimpleCursorAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        presenter = SearchPresenter(SearchModel())
+        presenter =
+            SearchPresenter(SearchModel())
         super.onCreate(savedInstanceState)
     }
 
@@ -59,7 +61,8 @@ class SearchFragment : Fragment(), SearchContract.View{
         setSearchBarListeners()
         setSearchBarState()
 
-        resultsAdapter = ResultsAdapter(presenter)
+        resultsAdapter =
+            ResultsAdapter(presenter)
         results_recycler_view.adapter = resultsAdapter
 
         ivBackArrow.setOnClickListener {
@@ -89,7 +92,9 @@ class SearchFragment : Fragment(), SearchContract.View{
     private fun setSearchBarListeners() {
         searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                presenter.query(query, ResultsAdapter.MULTI)
+                presenter.query(query,
+                    ResultsAdapter.MULTI
+                )
                 return false
             }
 
@@ -110,9 +115,15 @@ class SearchFragment : Fragment(), SearchContract.View{
 
             override fun onSuggestionClick(position: Int): Boolean {
                 when(position){
-                    0 -> presenter.query(searchBar.query.toString(), ResultsAdapter.PERSON)
-                    1 -> presenter.query(searchBar.query.toString(), ResultsAdapter.MOVIE)
-                    2 -> presenter.query(searchBar.query.toString(), ResultsAdapter.TV)
+                    0 -> presenter.query(searchBar.query.toString(),
+                        ResultsAdapter.PERSON
+                    )
+                    1 -> presenter.query(searchBar.query.toString(),
+                        ResultsAdapter.MOVIE
+                    )
+                    2 -> presenter.query(searchBar.query.toString(),
+                        ResultsAdapter.TV
+                    )
                 }
                 return false
             }
@@ -144,7 +155,8 @@ class SearchFragment : Fragment(), SearchContract.View{
         resultsAdapter.notifyDataSetChanged()
     }
 
-    override fun onClickResult(info: SearchAndBrowseDataModel) = navigateToNewFragment(DetailFragment.newInstance(info))
+    override fun onClickResult(info: SearchAndBrowseDataModel) = navigateToNewFragment(
+        DetailFragment.newInstance(info))
 
     override fun getQuery(): String = currentQuery
 
@@ -170,7 +182,7 @@ class SearchFragment : Fragment(), SearchContract.View{
 
     override fun getSharedPref(): SharedPreferences? = activity?.getPreferences(Context.MODE_PRIVATE)
 
-    private fun navigateToNewFragment(fragment: Fragment){
+    private fun navigateToNewFragment(fragment: Fragment){4
         activity?.supportFragmentManager
             ?.beginTransaction()
             ?.replace(R.id.container, fragment, null)

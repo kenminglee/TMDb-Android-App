@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tmdb.R
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
 import kotlinx.android.synthetic.main.fragment_browse_items.view.*
 
-class MoviesAdapter(var movies: List<SearchAndBrowseDataModel>, val viewModel: BrowseContract.ViewModel) : RecyclerView.Adapter<MoviesAdapter.MovieHolder>() {
+class MoviesAdapter(var movies: List<SearchAndBrowseDataModel>, val presenter: BrowseContract.Presenter) : RecyclerView.Adapter<MoviesAdapter.MovieHolder>() {
 
     inner class MovieHolder(val view: View): RecyclerView.ViewHolder(view){
         init {
             view.setOnClickListener {
-                viewModel.onMovieClick(movies[adapterPosition])
+                presenter.onMovieClick(movies[adapterPosition])
             }
         }
 

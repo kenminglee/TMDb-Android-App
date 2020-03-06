@@ -1,4 +1,4 @@
-package com.example.tmdb.model
+package com.example.tmdb.Model
 
 import com.example.tmdb.BuildConfig
 

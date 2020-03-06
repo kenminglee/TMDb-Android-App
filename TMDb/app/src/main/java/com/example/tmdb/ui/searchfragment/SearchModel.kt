@@ -1,8 +1,8 @@
-package com.example.tmdb.ui.searchfragment
+package com.example.tmdb.UI.SearchFragment
 
-import com.example.tmdb.model.network.ApiFactory
-import com.example.tmdb.model.network.TmdbApi
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
+import com.example.tmdb.Model.Network.ApiFactory
+import com.example.tmdb.Model.Network.TmdbApi
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -11,7 +11,8 @@ import java.lang.Exception
 
 class SearchModel : SearchContract.Model {
     private lateinit var presenter: SearchContract.Presenter
-    private var service: TmdbApi = ApiFactory().getRetrofitClient()
+    private var service: TmdbApi = ApiFactory()
+        .getRetrofitClient()
 
     override fun setPresenter(presenter: SearchContract.Presenter) {
         this.presenter = presenter
@@ -25,15 +26,18 @@ class SearchModel : SearchContract.Model {
                     if (response.isSuccessful){
                         val temp = response.body()?.results?.map { tmdbData ->
                             SearchAndBrowseDataModel(
-                                tmdbData.id?: 0,
+                                tmdbData.id ?: 0,
                                 tmdbData.mediaType ?: "",
                                 tmdbData.name ?: tmdbData.title ?: "",
                                 tmdbData.vote_average ?: -1.0,
-                                tmdbData.poster_path ?: tmdbData.profilePath ?: tmdbData.backdrop_path ?: ""
+                                tmdbData.poster_path ?: tmdbData.profilePath
+                                ?: tmdbData.backdrop_path ?: ""
                             )
                         }
 
-                        presenter.findPositionAndRenderResults(temp?: listOf(), ResultsAdapter.MULTI)
+                        presenter.findPositionAndRenderResults(temp?: listOf(),
+                            ResultsAdapter.MULTI
+                        )
                     }
                 } catch (e: Exception) {e.printStackTrace()}
             }
@@ -48,11 +52,12 @@ class SearchModel : SearchContract.Model {
                     if (response.isSuccessful){
                         val results = response.body()?.results?.map { tmdbData ->
                             SearchAndBrowseDataModel(
-                                tmdbData.id?: 0,
+                                tmdbData.id ?: 0,
                                 type,
                                 tmdbData.name ?: tmdbData.title ?: "",
                                 tmdbData.vote_average ?: -1.0,
-                                tmdbData.poster_path ?: tmdbData.profilePath ?: tmdbData.backdrop_path ?: ""
+                                tmdbData.poster_path ?: tmdbData.profilePath
+                                ?: tmdbData.backdrop_path ?: ""
                             )
                         }?: listOf()
 

@@ -1,17 +1,17 @@
 package com.example.tmdb.UI.BrowseFragment
 
 import kotlinx.coroutines.CoroutineScope
-import com.example.tmdb.model.network.ApiFactory
-import com.example.tmdb.model.network.TmdbApi
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
-import com.example.tmdb.ui.searchfragment.ResultsAdapter
+import com.example.tmdb.Model.Network.ApiFactory
+import com.example.tmdb.Model.Network.TmdbApi
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.SearchFragment.ResultsAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class BrowseModel : BrowseContract.Model{
-    private lateinit var viewModel: BrowseContract.ViewModel
+class BrowseModel : BrowseContract.Model {
+    private lateinit var presenter: BrowseContract.Presenter
     private lateinit var service: TmdbApi
 
     override fun fetchAllMovies(){
@@ -28,21 +28,22 @@ class BrowseModel : BrowseContract.Model{
                 try{
                     val temp = response.body()?.results?.map { Tmdb ->
                         SearchAndBrowseDataModel(
-                            Tmdb.id?: 0,
-                            Tmdb.mediaType?: ResultsAdapter.MOVIE,
-                            Tmdb.name?: Tmdb.title?: "",
-                            Tmdb.vote_average?: -1.0,
+                            Tmdb.id ?: 0,
+                            Tmdb.mediaType
+                                ?: ResultsAdapter.MOVIE,
+                            Tmdb.name ?: Tmdb.title ?: "",
+                            Tmdb.vote_average ?: -1.0,
                             Tmdb.poster_path ?: Tmdb.backdrop_path ?: Tmdb.profilePath ?: ""
                         )
                     }
-                    if (response.isSuccessful) viewModel.renderMovies(temp?: listOf(), type)
+                    if (response.isSuccessful) presenter.renderMovies(temp?: listOf(), type)
                 } catch (e: Exception) {e.printStackTrace()}
             }
         }
     }
 
-    override fun setViewModel(viewmodel: BrowseContract.ViewModel) {
-        this.viewModel = viewmodel
+    override fun setPresenter(presenter: BrowseContract.Presenter) {
+        this.presenter = presenter
     }
 
 }

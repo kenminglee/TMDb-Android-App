@@ -1,6 +1,6 @@
-package com.example.tmdb.model.network
+package com.example.tmdb.Model.Network
 
-import com.example.tmdb.model.AppConstants
+import com.example.tmdb.Model.AppConstants
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -25,7 +25,7 @@ class ApiFactory{
         }
     }
 
-    fun getRetrofitClient(): TmdbApi{
+    fun getRetrofitClient(): TmdbApi {
         //OkhttpClient for building http request url
         val tmdbClient = OkHttpClient().newBuilder()
             .addInterceptor(getAuthInterceptor())

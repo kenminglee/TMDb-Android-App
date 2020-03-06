@@ -1,4 +1,4 @@
-package com.example.tmdb.ui.datamodel
+package com.example.tmdb.UI.DataModel
 
 data class SearchAndBrowseDataModel(
     val id: Int,

@@ -1,9 +1,9 @@
-package com.example.tmdb.ui.containeractivity
+package com.example.tmdb.UI.ContainerActivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tmdb.R
-import com.example.tmdb.ui.homefragment.HomeFragment
+import com.example.tmdb.UI.HomeFragment.HomeFragment
 import com.facebook.drawee.backends.pipeline.Fresco
 
 class ContainerActivity : AppCompatActivity() {

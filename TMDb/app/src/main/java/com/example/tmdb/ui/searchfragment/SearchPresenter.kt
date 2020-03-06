@@ -1,10 +1,11 @@
-package com.example.tmdb.ui.searchfragment
+package com.example.tmdb.UI.SearchFragment
 
 import android.content.SharedPreferences
 import com.example.tmdb.R
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
 
-class SearchPresenter(private var model: SearchContract.Model) : SearchContract.Presenter{
+class SearchPresenter(private var model: SearchContract.Model) :
+    SearchContract.Presenter {
     private var view: SearchContract.View? = null
     private var sharedPreferences: SharedPreferences? = null
 
@@ -14,7 +15,9 @@ class SearchPresenter(private var model: SearchContract.Model) : SearchContract.
         model.setPresenter(this)
         sharedPreferences = view.getSharedPref()
         if(view.getQuery().isNotEmpty())
-            query(view.getQuery(), ResultsAdapter.MULTI)
+            query(view.getQuery(),
+                ResultsAdapter.MULTI
+            )
     }
 
     override fun onDetach() {

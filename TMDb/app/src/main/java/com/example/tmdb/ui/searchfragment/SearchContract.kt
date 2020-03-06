@@ -1,7 +1,7 @@
-package com.example.tmdb.ui.searchfragment
+package com.example.tmdb.UI.SearchFragment
 
 import android.content.SharedPreferences
-import com.example.tmdb.ui.datamodel.SearchAndBrowseDataModel
+import com.example.tmdb.UI.DataModel.SearchAndBrowseDataModel
 
 interface SearchContract {
     interface View{

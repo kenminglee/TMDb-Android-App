@@ -1,4 +1,4 @@
-package com.example.tmdb.ui.webviewfragment
+package com.example.tmdb.UI.WebViewFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.containeractivity.ContainerActivity">
+    tools:context="com.example.tmdb.UI.ContainerActivity.ContainerActivity">
 
     <FrameLayout
         android:layout_width="match_parent"

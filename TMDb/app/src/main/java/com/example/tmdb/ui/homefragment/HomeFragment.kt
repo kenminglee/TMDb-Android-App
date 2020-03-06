@@ -1,4 +1,4 @@
-package com.example.tmdb.ui.homefragment
+package com.example.tmdb.UI.HomeFragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import com.example.tmdb.R
 import com.example.tmdb.UI.BrowseFragment.BrowseFragment
-import com.example.tmdb.ui.searchfragment.ResultsAdapter
-import com.example.tmdb.ui.searchfragment.SearchFragment
+import com.example.tmdb.UI.SearchFragment.ResultsAdapter
+import com.example.tmdb.UI.SearchFragment.SearchFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -53,7 +53,8 @@ class HomeFragment : Fragment() {
             ?.commit()
     }
     companion object{
-        fun newInstance(): HomeFragment = HomeFragment()
+        fun newInstance(): HomeFragment =
+            HomeFragment()
     }
 
 }

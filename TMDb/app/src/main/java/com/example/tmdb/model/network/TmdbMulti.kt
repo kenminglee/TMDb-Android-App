@@ -1,4 +1,4 @@
-package com.example.tmdb.model.network
+package com.example.tmdb.Model.Network
 
 import com.google.gson.annotations.SerializedName
 

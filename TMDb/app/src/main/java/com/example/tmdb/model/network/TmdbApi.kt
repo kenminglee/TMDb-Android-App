@@ -1,4 +1,4 @@
-package com.example.tmdb.model.network
+package com.example.tmdb.Model.Network
 
 import retrofit2.Response
 import retrofit2.http.GET
